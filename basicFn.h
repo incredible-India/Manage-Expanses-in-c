@@ -1,7 +1,7 @@
 void gotoxy(int,int);
 void setcolor(int);
 void exitFN(void);
-
+void AddData(void);
 
 
 void ShowMenu(void)
@@ -17,6 +17,8 @@ SetConsoleTitle("Menu");
 
     Sleep(10);
     system("cls");
+     gotoxy(30,1);
+     printf("%s",__DATE__);
 
     gotoxy(10,2);
     setcolor(6);
@@ -43,6 +45,7 @@ SetConsoleTitle("Menu");
 
     if(choice == '1')
     {
+        AddData();
 
     }else if(choice == '1')
     {

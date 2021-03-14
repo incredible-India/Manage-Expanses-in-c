@@ -8,20 +8,12 @@
 
 //user Define Header Files
 #include"basicFn.h" //(showMenu,gotoxy,setcolor)
-
+#include"insertion.h"//(AddData);
 //Functions declaration
 
 void ShowMenu(void);
 
 //global variables
-struct myExpanses
-{
-     char title[100];
-     float ammount;
-     struct myExpanses *next;
-
-
-};
 
 
 int i,j;
