@@ -2,8 +2,8 @@ void gotoxy(int,int);
 void setcolor(int);
 void exitFN(void);
 void AddData(void);
-
-
+void seeREC(void);
+void  DeleteRECORDS(void);
 void ShowMenu(void)
 {
 extern int i;
@@ -48,14 +48,15 @@ SetConsoleTitle("Menu");
          system("cls");
         AddData();
 
-    }else if(choice == '1')
-    {
-
     }else if(choice == '2')
     {
+        system("cls");
+        seeREC();
 
     }else if(choice == '3')
     {
+          system("cls");
+        DeleteRECORDS();
 
     }else if(choice == '4')
     {
@@ -134,4 +135,60 @@ void ShowMenuOPT()
     setcolor(9);
     printf("5 : Exit");
 
+}
+
+
+void  seeREC()
+{
+
+    FILE *p;
+
+    p=fopen("SAVEDATA.txt","r");
+    char myDATA;
+    if(p==NULL)
+    {
+
+        gotoxy(40,12);
+        printf("FILE HAS BEEN DELETED...");
+        getch();
+        ShowMenu();
+    }else
+    {
+
+        while(!feof(p))
+        {
+            setcolor(2);
+                myDATA = fgetc(p);
+                printf("%c",myDATA);
+
+        }
+        fclose(p);
+
+        getch();
+        ShowMenu();
+
+    }
+}
+
+void  DeleteRECORDS()
+{
+
+    int del;
+
+    del =remove("SAVEDATA.txt");
+
+    if(del == 0)
+    {
+           gotoxy(40,12);
+           setcolor(5);
+        printf("FILE DELETED SUCCESSFULLY...");
+        getch();
+        ShowMenu();
+    }else
+    {
+             gotoxy(40,12);
+        printf("FILE HAS ALREADY DELETED ");
+        getch();
+        ShowMenu();
+    }
 }
