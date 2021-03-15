@@ -45,6 +45,7 @@ SetConsoleTitle("Menu");
 
     if(choice == '1')
     {
+         system("cls");
         AddData();
 
     }else if(choice == '1')
@@ -101,7 +102,7 @@ void setcolor(int ForgC)
      return;
 }
 
-void exitFN(void)
+void exitFN()
 {
     system("cls");
     setcolor(4);
@@ -111,3 +112,26 @@ void exitFN(void)
     exit(0);
 }
 
+void ShowMenuOPT()
+{
+    gotoxy(5,1);
+    setcolor(2);
+    printf("1 : Add New");
+
+        gotoxy(20,1);
+    setcolor(7);
+    printf("2 : Menu");
+
+         gotoxy(35,1);
+    setcolor(3);
+    printf("3 : Delete");
+
+       gotoxy(50,1);
+    setcolor(6);
+    printf("4 : Save");
+
+    gotoxy(65,1);
+    setcolor(9);
+    printf("5 : Exit");
+
+}

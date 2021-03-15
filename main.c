@@ -9,8 +9,10 @@
 //user Define Header Files
 #include"basicFn.h" //(showMenu,gotoxy,setcolor)
 #include"insertion.h"//(AddData);
-//Functions declaration
 
+//define macro
+#define ESC 27
+//Functions declaration
 void ShowMenu(void);
 
 //global variables
