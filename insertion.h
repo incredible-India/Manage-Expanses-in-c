@@ -11,8 +11,8 @@ struct myExpanses
 struct myExpanses* __addone(struct myExpanses *);
 struct myExpanses* insertNEW(struct myExpanses *);
 void showData(struct myExpanses *);
-int deleteIT(struct myExpanses *);
-
+struct myExpanses* deleteIT(struct myExpanses *);
+void SaveDATA(struct myExpanses *);
 //functions
 void AddData(void)
 {
@@ -32,7 +32,7 @@ int retVAL;
 
            char ch;
                 w1:
-                    w4:
+
                         w5:
            readAg:
            ch=getch();
@@ -55,19 +55,20 @@ int retVAL;
            }else if (ch == '3')
            {
                system("cls");
-                retVAL = deleteIT(data);
-                if(retVAL == 2)
-                {
-                    goto w4;
-                }else
-                {  system("cls");
+                data = deleteIT(data);
+               system("cls");
                 ShowMenuOPT();
                 showData(data);
                 goto w5;
 
-                }
 
-           }else if(ch == '5')
+
+           }else if(ch == '4')
+           {
+               SaveDATA(data);
+           }
+
+           else if(ch == '5')
            {
                free(data);
                exitFN();
@@ -177,20 +178,30 @@ struct myExpanses* insertNEW(struct myExpanses *data)
 
 }
 
-int deleteIT(struct myExpanses *CRTdata)
+struct myExpanses * deleteIT(struct myExpanses *CRTdata)
 {
 
 extern int j;
+   struct myExpanses *oldONE = CRTdata;
     struct myExpanses *delete_item = CRTdata->next;
-    struct myExpanses *oldONE = CRTdata;
+    struct myExpanses *blankSPACE;
+
+    blankSPACE= (struct myExpanses *) malloc(sizeof(struct myExpanses *));
+    blankSPACE->title[0] = 'E';
+    blankSPACE->title[1] = 'm';
+    blankSPACE->ammount =0;
+    blankSPACE->next =NULL;
+
     int choice;
+    int index;
     w3:
     gotoxy(40,12);
     setcolor(100);
-    printf("Enter The Serial Number You Want to Delete (type \'501\' to Back)");
+    printf("Enter The Serial Number You Want to Delete");
       gotoxy(40,14);
     setcolor(101);
     scanf("%d",&choice);
+    index = choice;
     if(choice < 0)
     {
         setcolor(2);
@@ -200,13 +211,15 @@ extern int j;
         system("cls");
         goto w3;
 
-    }else if(choice == 501)
-    {
-
-        return 2;
     }else
     {
-        for(j=0; j<((choice-1)-1);j++)
+        if(index == 0)
+        {
+            free(oldONE);
+            return blankSPACE;
+        }else
+        {
+               for(j=0; j<(index-1);j++)
         {
             delete_item = delete_item->next;
             oldONE = oldONE->next;
@@ -215,9 +228,45 @@ extern int j;
         oldONE->next = delete_item->next;
 
         free(delete_item);
-        return 1;
+        return oldONE;
+
+        }
+
     }
 
+
+
+}
+
+void SaveDATA(struct myExpanses *datas)
+{
+
+    FILE *p;
+
+    extern int i;
+    i=0;
+    p = fopen("SAVEDATA.txt","a");
+
+    fprintf(p,"%s\n",__DATE__);
+      while(datas != NULL)
+    {
+     ++i;
+
+        fprintf(p,"\n%d  \t%s\t",i,datas->title);
+
+
+        fprintf(p,"%0.2f\n",datas->ammount);
+
+       // datas->ammount +=datas->ammount;
+        datas = datas->next;
+
+    }
+    fclose(p);
+    system("cls");
+    gotoxy(40,12);
+    printf("File has benn saved..");
+    getch();
+    ShowMenu();
 
 
 }
