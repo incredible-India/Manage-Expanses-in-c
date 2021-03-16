@@ -1,6 +1,6 @@
 /*Himanshu Sharma */
 /*Date 15/03/2020*/
-
+//SUbmission for NIT KURUKSHETRA (Nitin Singh)
 #include<stdio.h>
 #include<windows.h>
 #include<stdlib.h>
